@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue First</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="scripts/app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            <input type="checkbox" id="japan" @click="checkJapan" v-model="japanChecked">
+            <label for="japan">全国</label>
+          </th>
+          <td>
+          </td>
+        </tr>
+        <tr v-for="area in areas">
+          <th>
+            <input type="checkbox" :id="`area_${area.id}`" @click="checkArea(area.id)" v-model="area.checked">
+            <label :for="`area_${area.id}`">{{ area.name }}</label>
+          </th>
+          <td v-for="pref in area.prefs">
+            <input type="checkbox" :id="`pref_${pref.id}`" @click="checkPref(pref.id)" v-model="pref.checked">
+            <label :for="`pref_${pref.id}`">{{ pref.name }}</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button @click="clearAll">クリア</button>
+      <button @click="renderNames">プリント</button>
+    </div>
+    <div>{{ renderedNames }}</div>
+  </div>
+</body>
+</html>
+
